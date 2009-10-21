@@ -9,6 +9,7 @@
 
     $instance = get_record('block_instance', 'id', $id);
     $block = block_instance('programming_latest_ac', $instance);
+    $context = get_context_instance(CONTEXT_BLOCK, $id);
     $perpage = $block->config->perpageonfulllist;
 
     if (!$course = get_record('course', 'id', $block->instance->pageid)) {
@@ -78,7 +79,7 @@
         foreach ($tops as $t) {
             $table->add_data(array(
                 $i--,
-                has_capability('block/programming_latest_ac:view') ? '<a href="'.$CFG->wwwroot.'/user/view.php?id='.$t->user->id.'&amp;course='.$course->id.'">'.fullname($t->user).'</a>' : '???',
+                has_capability('block/programming_latest_ac:view', $context) ? '<a href="'.$CFG->wwwroot.'/user/view.php?id='.$t->user->id.'&amp;course='.$course->id.'">'.fullname($t->user).'</a>' : '???',
                 "<a href='{$CFG->wwwroot}/mod/programming/view.php?a={$t->pid}'>".$t->globalid.' '.$t->pname.'</a>',
                 userdate($t->timemodified, '%Y-%m-%d %H:%M:%S'),
             ));
