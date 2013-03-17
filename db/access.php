@@ -37,10 +37,8 @@ $block_programming_latest_ac_capabilities = array(
 
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-        'legacy' => array(
-            'teacher' => CAP_ALLOW,
-            'editingteacher' => CAP_ALLOW,
-            'admin' => CAP_ALLOW
+        'archetypes' => array(
+            'user' => CAP_ALLOW,
         )
     ),
 

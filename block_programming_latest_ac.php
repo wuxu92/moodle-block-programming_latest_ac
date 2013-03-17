@@ -6,16 +6,33 @@ include_once($CFG->dirroot.'/lib/tablelib.php');
 class block_programming_latest_ac extends block_base {
 
     function init() {
-        $this->title = get_string('programminglatestac', 'block_programming_latest_ac');
-        $this->version = 2007060201;
+        $this->title = get_string('pluginname', 'block_programming_latest_ac');
 
-        $this->config->roleforlatestac = 5; // default role id of students
-        $this->config->listhowmany = 15;
-        $this->config->perpageonfulllist = 20;
+    }
+
+    function instance_allow_config() {
+        return true;
+    }
+
+    function default_config() {
+        if (empty($this->config)) {
+            $this->config = new stdClass;
+        }
+        if (!isset($this->config->roleforlatestac)) {
+            $this->config->roleforlatestac = 5; // default role id of students
+        }
+
+        if (!isset($this->config->listhowmany)) {
+            $this->config->listhowmany = 15;
+        }
+
+        if (!isset($this->config->perpageonfulllist)) {
+            $this->config->perpageonfulllist = 20;
+        }
     }
 
     function get_content() {
-        global $CFG;
+        global $CFG, $PAGE;
 
         if ($this->content != NULL) {
             return $this->content;
@@ -24,34 +41,15 @@ class block_programming_latest_ac extends block_base {
         if (!isset($this->instance)) {
             return '';
         }
-        $total = 0;
-        $tops = programming_latest_ac($this->instance->pageid, $this->config->roleforlatestac, $total, 0, $this->config->listhowmany);
+
+        $this->default_config();
+
+        $course = $this->page->context;
+
+        $renderer = $PAGE->get_renderer('block_programming_latest_ac');
         $this->content = new stdClass;
-        $c  = '<div id="block-programming-latest-ac">';
-        $c .= '<table align="center" class="generaltable generalbox" cellpadding="3" cellspacing="1">';
-        $c .= '<tr align="center">';
-        $c .= '<th>'.get_string('who', 'block_programming_latest_ac').'</th>';
-        $c .= '<th>'.get_string('which', 'block_programming_latest_ac').'</th>';
-        $c .= '</tr>';
-        if (is_array($tops)) {
-            foreach ($tops as $t) {
-                $c .= '<tr align="center">';
-                $c .= '<td>';
-                $c .= '<a href="'.$CFG->wwwroot.'/user/view.php?id='.$t->user->id.'&amp;course='.$this->instance->pageid.'">'.fullname($t->user).'</a>';
-                $c .= '</td>';
-            
-                $c .= '<td>'.$t->globalid.'</td>';
-                $c .= '</tr>';
-            }
-        } else {
-            $c .= '<tr><td colspan="3">';
-            $c .= get_string('nosubmit', 'block_programming_latest_ac');
-            $c .= '</td></tr>';
-        }
-        $c .= '</table>';
-        $c .= '</div>';
-        $this->content->text = $c;
-        $this->content->footer = '<a href="'.$CFG->wwwroot.'/blocks/programming_latest_ac/fulllist.php?id='.$this->instance->id.'">'.get_string('more').'</a>';
+        $this->content->text = $renderer->ac_list($this->config, $course);
+        $this->content->footer = $renderer->footer($this->config, $this, $course);
 
         return $this->content;
     }
@@ -60,10 +58,6 @@ class block_programming_latest_ac extends block_base {
         return array('class' => 'sideblock block_'.$this->name);
     }
 
-    function instance_allow_config() {
-        return true;
-    }
-    
 }
 
 ?>

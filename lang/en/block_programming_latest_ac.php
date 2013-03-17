@@ -1,6 +1,6 @@
 <?php
 
-$string['programminglatestac'] = 'Programming Latest AC';
+$string['pluginname'] = 'Programming Latest AC';
 $string['no.'] = 'No.';
 $string['who'] = 'Who';
 $string['which'] = 'Which';

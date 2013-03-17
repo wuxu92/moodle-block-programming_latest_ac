@@ -1,6 +1,6 @@
 <?php
 
-$string['programminglatestac'] = '最新AC';
+$string['pluginname'] = '最新AC';
 $string['no.'] = '排名';
 $string['who'] = '姓名';
 $string['which'] = '题目';
