@@ -31,7 +31,7 @@
 // For the core capabilities, the variable is $moodle_capabilities.
 
 
-$block_programming_latest_ac_capabilities = array(
+$capabilities = array(
 
     'block/programming_latest_ac:view' => array(
 
