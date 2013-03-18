@@ -14,6 +14,7 @@ $string['showhowmanyonlist'] = 'Show how many person on the list';
 $string['perpageonfulllist'] = 'How many person per page on the full list';
 $string['roleforlatestac'] = 'Role for latest AC list';
 $string['howmanyminuteswrongsubmit'] = 'How many minutes for one error submit';
+$string['programming_latest_ac:view'] = 'See all fullnames';
 
 
 ?>

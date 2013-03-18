@@ -15,6 +15,7 @@ $string['showhowmanyonlist'] = '在排名列表上列出多少记录';
 $string['perpageonfulllist'] = '在完整名单上每页列出多少人';
 $string['roleforlatestac'] = '需要列出的角色';
 $string['howmanyminuteswrongsubmit'] = '每次提交记为多少分钟的罚分';
+$string['programming_latest_ac:view'] = '看到所有姓名';
 
 
 ?>
