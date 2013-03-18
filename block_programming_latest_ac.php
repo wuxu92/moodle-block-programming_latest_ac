@@ -32,7 +32,7 @@ class block_programming_latest_ac extends block_base {
     }
 
     function get_content() {
-        global $CFG, $PAGE;
+        global $PAGE;
 
         if ($this->content != NULL) {
             return $this->content;
